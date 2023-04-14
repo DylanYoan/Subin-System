@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="container">
+    <h2>Pago</h2>
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm-9">
+                <h3 class="text-primary">Oferta</h3>
+                
+                <input type="text" placeholder="Ingresa la cantidad de la Oferta" id="precio" style="width: 300px;" />
+                <button class="btn btn-success" onclick="pagar()"><i class="fab fa-paypal"></i> Realizar Pago</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/jquery-loading-overlay/loadingoverlay.min.js"></script>
+    <script>
+
+        function pagar() {
+
+
+            var body = {
+                precio: $("#precio").val(),
+                producto: "Microfono Hyperx Quadcast"
+            }
+
+
+
+            jQuery.ajax({
+                url: '@Url.Action("Paypal", "PagoPayPal")',
+                type: "POST",
+                data: JSON.stringify(body),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                     console.log(data);
+                     $("div.jumbotron").LoadingOverlay("hide");
+
+                     if (data.status) {
+
+                         var jsonresult = JSON.parse(data.respuesta);
+
+                         console.log(jsonresult);
+
+                         var links = jsonresult.links;
+
+                        var resultado = links.find(item => item.rel === "approve")
+
+                         window.location.href = resultado.href
+
+                         /*console.log(links)*/
+                         /*console.log(resultado)*/
+                     } else {
+                        alert("Vuelva a intentarlo más tarde")
+                     }
+
+
+                },
+                beforeSend: function () {
+                    $("div.jumbotron").LoadingOverlay("show");
+                }
+            });
+
+
+        }
+
+    </script>
+
+}

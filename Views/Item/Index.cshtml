@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SubIn.Models.Item>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Items</h2>
+
+    <p>
+        @Html.ActionLink("Agregar Nuevo", "Create", "Item", new { @class = "btn btn-dark" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripción
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre_item)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descripcion_item)
+                </td>
+
+
+            </tr>
+        }
+
+    </table>
+
+</div>
+

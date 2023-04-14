@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@Styles.Render("~/Content/css/home")
+
+<style>
+    body {
+        overflow: hidden;
+    }
+
+   /* ul li:nth-child(1) {
+        border-bottom: 1px solid black;
+    }*/
+</style>
+
+<header class="masthead">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <img src="~/Images/favicon.png" alt="Subin Logo" style="width: 200px; height: 300px;">
+                <h2 class="text-white-50 mx-auto mt-2 mb-5">
+                    ¡Subasta, intercambia, transforma! Bienvenido a Subin, tu destino para obtener lo que quieres y deshacerte de lo que ya no necesitas.
+                </h2>
+                <a class="btn btn-primary" href="@Url.Action("Register", "Account")">Empezemos</a>
+            </div>
+        </div>
+    </div>
+</header>
